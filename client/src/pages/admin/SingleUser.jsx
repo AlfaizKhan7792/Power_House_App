@@ -37,7 +37,7 @@ const SingleUser = () => {
           placeholder="Search user by name or email"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full sm:w-1/2 px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          className="w-full sm:w-1/2 px-4 py-2 text-black rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
         />
         <button
           onClick={handleSearch}
