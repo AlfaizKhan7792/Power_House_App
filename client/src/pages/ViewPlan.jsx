@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import Loading from './Loading'
 import { GeneratePlan, GetPlan } from '../features/plans/PlansSlice'
 import { useParams } from 'react-router-dom'
+import PowerHouseImg from "../../public/PowerHousePNG.png"
 
 const ViewPlan = () => {
   const { user } = useSelector((state) => state.Auth)
@@ -37,6 +38,19 @@ const ViewPlan = () => {
     window.print()
   }
 
+    const getImageByGoal = (goal) => {
+      switch (goal) {
+        case "gain":
+          return "https://tse4.mm.bing.net/th?id=OIP.0P5REugIWoo6QQnqnuM-sAHaJX&pid=Api&P=0&h=180";
+        case "maintain":
+          return "https://tse4.mm.bing.net/th?id=OIP.GZRK8Yc7q3M77004FwmdVQHaHa&pid=Api&P=0&h=180";
+        case "loose":
+          return "https://media.tenor.com/images/190d95559eacabe9ada06ce6e4bb7645/tenor.gif";
+        default:
+          return PowerHouseImg; // fallback image
+      }
+    };
+
   useEffect(() => {
     dispatch(GetPlan(pid))
     if (isErrro && message) {
@@ -56,8 +70,8 @@ const ViewPlan = () => {
       <div className="p-5 border rounded-md">
         <div className="card text-white mb-3 border rounded-lg shadow-lg flex items-center justify-between">
           <img
-            src="https://tse4.mm.bing.net/th?id=OIP.GZRK8Yc7q3M77004FwmdVQHaHa&pid=Api&P=0&h=180"
-            alt="..."
+            src={getImageByGoal(Plan.goal)}
+            alt={`${Plan?.goal} Plan`}
             className="w-[25%] rounded-t-lg"
           />
           <div className="border rounded-md p-4 me-60">

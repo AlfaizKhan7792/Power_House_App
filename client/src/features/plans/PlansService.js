@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const API_URL = "/api/plan";
+import { API_URL } from "../../config";
 
 // Fetch All Plans
 const fetchPlans = async (id , token) =>{
@@ -11,7 +10,7 @@ const options = {
     }
 }
 try {
-    const response = await axios.get(`${API_URL}/${id}`, options)
+    const response = await axios.get(`${API_URL}/api/plan/${id}`, options)
 return response.data
 } catch (error) {
     toast.error(error)
@@ -25,7 +24,7 @@ const fetchPlan = async (pid , token) =>{
             authorization : `Bearer ${token}`
         }
     }
-    const response = await axios.get(`${API_URL}/view/${pid}`, options)
+    const response = await axios.get(`${API_URL}/api/plan/view/${pid}`, options)
     return response.data
 }
 
@@ -37,7 +36,7 @@ const createPlan = async (formData , token) =>{
             authorization : `Bearer ${token}`
         }
     };
-    const response = await axios.post(API_URL , formData , options)
+    const response = await axios.post(`${API_URL}/api/plan` , formData , options)
     return response.data
 }
 
@@ -49,8 +48,7 @@ const generate = async (userInfo , token) =>{
             authorization : `Bearer ${token}`
         }
     }
-    const response = await axios.post("/api/gemini/generate-plan", userInfo, options)
-    // console.log(response.data);
+    const response = await axios.post(`${API_URL}/api/gemini/generate-plan`, userInfo, options)
     return response.data
 }
 
@@ -61,7 +59,7 @@ const deletee = async (id , token) =>{
             authorization : `Bearer ${token}`
         }
     }
-    const response = await axios.delete(`${API_URL}/${id}`, options)
+    const response = await axios.delete(`${API_URL}/api/plan/${id}`, options)
     console.log(response)   
     return await response.data
 }
